@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pet Car Urb</string>
+    <string name="inicio">Navegador</string>
+    <string name="txt">Ingrese un sitio web</string>
+    <string name="boton">Ir al sitio</string>
+    <string name="boton2">Cerrar</string>
+</resources>
