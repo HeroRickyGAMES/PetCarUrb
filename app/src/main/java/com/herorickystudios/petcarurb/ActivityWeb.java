@@ -1,11 +1,21 @@
 package com.herorickystudios.petcarurb;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 //Programado por HeroRicky_Games e Doménica
 
@@ -25,17 +35,45 @@ public class ActivityWeb extends AppCompatActivity {
         String url= "petcarurbaomeupetc.wixsite.com/petcarurb";
 
         //WebViewClient() para que se abra dentro de la aplicacion
-        webV.setWebViewClient(new WebViewClient());
+        webV.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                // Página iniciada
+                System.out.println(url);
+
+                if(url.equals("whatsapp://send/?phone=5511980203863&text&type=phone_number&app_absent=0")){
+
+                    Uri uri = Uri.parse("https://wa.me/5511980203863");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+
+                }
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // Página finalizada
+
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                webV.loadUrl("https://petcarurbaomeupetc.wixsite.com/petcarurb");
+            }
+        });
+
 
         //Iniciamos la busqueda
         webV.loadUrl("https://"+url);
         webV.getSettings().setJavaScriptEnabled(true);
         webV.getSettings().setAllowContentAccess(true);
 
+
         //Esconde a action Bar
         getSupportActionBar().hide();
 
-    }
+}
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -52,5 +90,6 @@ public class ActivityWeb extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
 }
