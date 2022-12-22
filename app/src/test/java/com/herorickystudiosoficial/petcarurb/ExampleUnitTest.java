@@ -1,4 +1,4 @@
-package com.herorickystudios.petcarurb;
+package com.herorickystudiosoficial.petcarurb;
 
 import org.junit.Test;
 
